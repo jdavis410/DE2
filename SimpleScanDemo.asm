@@ -466,6 +466,19 @@ BigWallDist: DW 0
 SmallWall:  DW 0          ; Angle of the small wall relative to the robot
 SmallWallDist: DW 0
 Dist2Travel: DW 0 
+
+DontHitWall: 
+	LOAD    Mask2 
+	OUT     SONAREN
+	IN		DIST2
+	SUB	    HalfMeter
+	JNEG	BackUpStop
+	RETURN  
+
+BackUpStop: 
+	LOADI 0
+	STORE DVel
+	RETURN
 	
 ; FindClosest subroutine will go through the acquired data
 ; and return the angle of the closest sonar reading.
